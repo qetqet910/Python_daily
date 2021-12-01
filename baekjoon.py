@@ -139,3 +139,43 @@ print(end)
 
 # 둘 코드의 다른 점 은... 제일 큰 시간 단축의 코드는 length = sum(i-mid if i > mid else 0 for i in woods) 인 것 같다.
 # 나중에 더 알아보자 (12월 01일 이분 탐색)
+
+N, M, B= map(int, input().split())
+
+woods = []
+Sec = 0
+
+for i in range(N):
+    woods += list(map(int, input().split()))
+
+start, end = min(woods), max(woods)
+
+while start <= end:
+    count = 0
+    location = 0
+    
+    woods.remove(start)
+    woods.remove(end)
+
+    if(len(woods) == 0):
+        if(woods.count(start) > woods.count(end)):
+            location = 1
+        else:
+            location = 0
+    else:
+        if(woods.count(start) > woods.count(end)):
+            location = 1
+        elif(woods.count(start) < woods.count(end)):
+            
+        else:
+            location = 0
+        
+    if start == end:
+        break
+    else:
+        if log >= M:
+            # 설치
+            count += 1
+        else:
+            # 파기
+            count += 2
