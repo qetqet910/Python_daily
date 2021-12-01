@@ -84,3 +84,58 @@ def prime(num):
 for i in range(M, N + 1):
     if prime(i):
         print(i)
+
+# 나무 자르기 (이분 탐색)
+
+###################################################### -- python 3 통과
+
+N, M = map(int, input().split())
+woods = list(map(int, input().split()))
+left, right = 0, max(woods)
+
+result = []
+
+while not right < left:
+    length = 0
+    mid = (left + right) // 2
+
+    #
+
+    length = sum(i-mid if i > mid else 0 for i in woods)
+
+    if length == M:
+        result.append(mid)
+        break
+    elif length > M:
+        result.append(mid)
+        left = mid + 1
+    else:
+        right = mid - 1
+
+print(max(result))
+
+###################################################### -- python 3 시간 초과
+
+N, M = map(int, input().split())
+woods = list(map(int, input().split()))
+start, end = 1, max(woods)
+
+while not end < start:
+    log = 0
+    mid = (start + end) // 2
+
+    for i in woods:
+        if(i >= mid):
+            log += i - mid
+
+    if log >= M:
+        start = mid + 1
+    else:
+        end = mid - 1
+
+print(end)
+
+######################################################
+
+# 둘 코드의 다른 점 은... 제일 큰 시간 단축의 코드는 length = sum(i-mid if i > mid else 0 for i in woods) 인 것 같다.
+# 나중에 더 알아보자 (12월 01일 이분 탐색)
