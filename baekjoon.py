@@ -140,42 +140,103 @@ print(end)
 # 둘 코드의 다른 점 은... 제일 큰 시간 단축의 코드는 length = sum(i-mid if i > mid else 0 for i in woods) 인 것 같다.
 # 나중에 더 알아보자 (12월 01일 이분 탐색)
 
-N, M, B= map(int, input().split())
+# 마인크래프트 아직 풀이를 잘 모르겠음 나중에 해석
 
-woods = []
-Sec = 0
+from sys import stdin
+from collections import Counter
+
+input = stdin.readline
+
+def minecraft(g, b):
+    gg = Counter(g)
+    ret = []
+    for h in range(max(gg.keys()), -1, -1):
+        gt = 0
+        inventory = b
+        needed = 0
+        for gh, gc in gg.items():
+            if h < gh:
+                inventory += (gh - h) * gc
+                gt += 2 * (gh - h) * gc
+            elif h > gh:
+                needed += (h - gh) * gc
+                gt += (h - gh) * gc
+        if inventory >= needed:
+            ret.append([gt, h])
+    ret.sort(key=lambda x: (x[0], -x[1]))
+    return ret[0]
+
+
+if __name__ == "__main__":
+    N, M, B = map(int, input().split())
+    grounds = []
+    for _ in range(N):
+        grounds.extend(list(map(int, input().split())))
+    res = minecraft(grounds, B)
+    print(res[0], res[1])
+
+# 팰린드롬 만들기
+
+s=input()
+
+for i in range(len(s)):
+    if s[i:]==s[i:][::-1]:
+        print(len(s)+i)
+        break
+    
+# s[i:] 왼쪽부터 줄여나감
+# abab, bab, ab, b
+
+# s[i:][::-1] 왼쪽부터
+# 줄여나가지만 뒤집은 상태임
+# baba, bab, ba, b 
+
+# ex) qwerty ytrewq
+# ex) werty ytrew
+# ex) erty ytre
+# ex) rty ytr
+# ex) ty yt
+# ex) y == y
+
+# 부분 팰린드롭 공식
+# for i in range(len(s)):
+#     s[i:]==s[i:][::-1]
+
+# 큐
+
+import sys
+
+N = int(sys.stdin.readline())
+
+numlist = []
 
 for i in range(N):
-    woods += list(map(int, input().split()))
-
-start, end = min(woods), max(woods)
-
-while start <= end:
-    count = 0
-    location = 0
+    nums = sys.stdin.readline().split()
     
-    woods.remove(start)
-    woods.remove(end)
+    if(nums[0] == 'push'):
+        numlist.append(nums[1])
+    elif(nums[0] == 'pop'):
+        if(len(numlist) == 0):
+            print(-1)
+        else:
+            print(numlist.pop(0))
+    elif(nums[0] == 'size'):
+        print(len(numlist))
+    elif(nums[0] == 'empty'):
+        if(len(numlist) == 0):
+            print(1)
+        else:
+            print(0)
+    elif(nums[0] == 'front'):
+        if(len(numlist) == 0):
+            print(-1)
+        else:
+            print(numlist[0])
+    elif(nums[0] == 'back'):
+        if(len(numlist) == 0):
+            print(-1)
+        else:
+            print(numlist[-1])
 
-    if(len(woods) == 0):
-        if(woods.count(start) > woods.count(end)):
-            location = 1
-        else:
-            location = 0
-    else:
-        if(woods.count(start) > woods.count(end)):
-            location = 1
-        elif(woods.count(start) < woods.count(end)):
-            
-        else:
-            location = 0
-        
-    if start == end:
-        break
-    else:
-        if log >= M:
-            # 설치
-            count += 1
-        else:
-            # 파기
-            count += 2
+
+# 스택
