@@ -239,4 +239,26 @@ for i in range(N):
             print(numlist[-1])
 
 
-# 스택
+# 백준 2609번 최대공약수와 최소공배수
+
+nums= list(map(int, input().split())) 
+# 유클리드의 호제법 사용을 위해 A > B or A < B 를 알아야 함
+# list로 받아서 A, B로 해주는 것이 if문을 줄일 수 있음
+
+A = max(nums)
+B = min(nums)
+# 입력받은 수 A > B
+
+gop = A * B
+# A * B == A와 B의 (최대공약수) * (최소공배수)
+# while문을 통과하면 A, B의 값이 변질되기 때문에 미리 만듦
+
+while B:
+    # 나머지가 0이 되면 멈춤
+    A, B = B, A % B
+    # ex) A % B = r | B % r = r1 | r % r1 = r2 ...
+    # => A = B, B = A % r
+
+print(A, gop // A)
+# 나머지가 0일 때 나누는 수 = A
+# gop // A == A, B의 최소공배수
