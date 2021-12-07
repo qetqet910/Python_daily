@@ -262,3 +262,29 @@ while B:
 print(A, gop // A)
 # 나머지가 0일 때 나누는 수 = A
 # gop // A == A, B의 최소공배수
+
+# 백준 7568번 덩치 (완전탐색 ?)
+
+N = int(input()) # 횟수 입력
+Nums = [] # 키, 몸무게 배열 선언
+
+for i in range(N): # N번 만큼 돌림
+    A, B = map(int, input().split())
+    # A, B 키 몸무게 입력 받음 
+    Nums.append((A, B))
+    # 튜플 형식으로 구분 가능하게 담음
+for i in Nums:
+    # 민들아진 키, 몸무게로 포문을 돌림
+    Rank = 1
+    # 여기서 랭크 선언 
+    for j in Nums:
+        # 여기서 j로 포문 한 번 더 선언하여 비교
+        if i[0] < j[0] and i[1] < j[1]:
+            # 이렇게 i 하나에 j 완전 퇌색
+            # i 라는 인물의 키 몸무게가 j 라는 인물의
+            # 키 몸무게 보다 작으면 랭킹을 내림
+            Rank += 1
+    print(Rank, end = " ")
+    # 한 줄에 출력하기 위해 end 사용, 출력
+
+    
