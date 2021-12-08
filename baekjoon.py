@@ -287,4 +287,50 @@ for i in Nums:
     print(Rank, end = " ")
     # 한 줄에 출력하기 위해 end 사용, 출력
 
-    
+
+# 백준 11866번 요세푸스 문제
+# 요세푸스의 수열 출력
+# 1부터 N 까지의 수열 생성
+
+N, K = map(int, input().split())
+
+List = []
+# 수열을 담을 List 선언
+
+for i in range(1, N + 1):
+    List.append(i)
+    # 수열 만들기 포문
+
+print("<", end="")
+# 출력 조건이 <~~~~> 이기 때문에 <을 먼저 선언한다
+while List:
+    # List의 값이 없어질 때 까지 반복
+    for j in range(K - 1):
+        # 복잡한 계산 필요 없이 K - 1번 포문을 돌리고
+        # K - 1 번 만큼 pop(0) 으로 뺴고 뺀 값을 뒤에 더해준다
+        List.append(List[0])
+        List.pop(0)
+    print(List.pop(0), end="")
+    # K - 1 번의 포문이 끝나면 K 번째 값을 출력해주고 List에서 뺴준다
+    if List:
+        # 마찬가지로 출력 형식을 맞추기 위해 적는 구문
+        print(",", end=" ")
+print(">")
+# 마찬가지로 출력 형식을 맞추기 위해 적는 구문
+
+
+
+# 요세푸스 문제를 해결하는 O(n)의 시간복잡도를 가지는 알고리즘이 존재한다.
+# 
+# n이 1이라고 가정하면 다음과 같이 초항을 구할 수 있다.
+# 
+# {\displaystyle f(1,k)=1\,}{\displaystyle f(1,k)=1\,}
+# n과 k사이의 관계식을 구하면 다음과 같다.
+# 
+# {\displaystyle f(n,k)=((f(n-1,k)+k-1){\bmod {n}})+1}{\displaystyle f(n,k)=((f(n-1,k)+k-1){\bmod {n}})+1}
+# 만약 사람의 순서를 1번째부터 n번째로 두는 대신 0번째부터 n-1번째로 가정하면 다음과 같이 관계식을 단순화할 수 있다.
+# 
+# {\displaystyle g(n,k)=(g(n-1,k)+k){\bmod {n}},{\text{ }}g(1,k)=0}{\displaystyle g(n,k)=(g(n-1,k)+k){\bmod {n}},{\text{ }}g(1,k)=0}
+# 만약 n이 매우 큰 수이고, k가 상대적으로 작은 수 일 때, 빠르게 답을 구할 수 있다는 사실이 알려져 있다. http://stackoverflow.com/questions/4845260/josephus-for-large-n-facebook-hacker-cup에서 조세퍼스 문제에 대한 O(k log n) 알고리즘을 구현한 코드를 확인할 수 있다.
+
+# 출처 -- 나무위키
