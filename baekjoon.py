@@ -372,3 +372,49 @@ for i in range(a):
     elif(num > 0):
         print("NO")
         # 탈락자
+
+# 백준 10866 덱
+
+from collections import deque
+import sys
+
+# 걍 쉬움 deque만 알면 됌 그럼 0.5초에 풀 수 이씀.
+# deque는 걍 리스트 상위호환 이라고 보면 됌.
+# 시간복잡도가 큐(FIFO)는 O(n) 인데 데큐는 O(1)임 미쳤음
+
+d = deque()
+
+for i in range(int(sys.stdin.readline())):
+    num = sys.stdin.readline().split()
+
+    if num[0] == "push_front" : d.appendleft(num[1])
+
+    elif num[0] == "push_back" : d.append(num[1])
+
+    elif num[0] == "pop_front":
+        if (len(d) != 0): print(d.popleft())
+        else: print(-1)
+
+    elif num[0] == "pop_back":
+        if(len(d) != 0): print(d.pop())
+        else: print(-1)
+
+    elif num[0] == "size": print(len(d))
+
+    elif num[0] == "empty":
+        if(len(d) == 0):
+            print(1)
+        else:
+            print(0)
+
+    elif num[0] == "front":
+        if(len(d) == 0):
+            print(-1)
+        else:
+            print(d[0])
+
+    elif num[0] == "back":
+        if (len(d) == 0):
+            print(-1)
+        else:
+            print(d[-1])
