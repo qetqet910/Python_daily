@@ -418,3 +418,21 @@ for i in range(int(sys.stdin.readline())):
             print(-1)
         else:
             print(d[-1])
+
+# 백준 좌표 정렬하기 11650번
+
+# 처음 56888 메모리 KB 4392ms 시간 189B 코드 길이
+# 끝 48924 메모리 KB 388ms 시간 186B 코드 길이
+
+import sys
+
+# 시간절약 위해 sys 사용
+N = int(sys.stdin.readline())
+
+NumList = []
+NumList = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
+# append 안 쓰고 리스트 안에 N 값으로 반복해서 시간을 줄임 
+NumList.sort()
+
+for i in NumList:
+    print(i[0], i[1])
